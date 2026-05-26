@@ -37,8 +37,15 @@ select {
   font: inherit;
 }
 
+input,
+textarea,
+select {
+  max-width: 100%;
+}
+
 button {
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .app-shell {
@@ -1280,8 +1287,19 @@ textarea {
 }
 
 @media (max-width: 640px) {
+  body {
+    overflow-x: hidden;
+  }
+
   .app-shell {
-    padding: 12px 12px 60px;
+    padding: 10px 10px 56px;
+  }
+
+  .site-header {
+    top: 8px;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding: 10px;
   }
 
   .brand-button,
@@ -1291,22 +1309,95 @@ textarea {
     width: 100%;
   }
 
+  .brand-button {
+    min-width: 0;
+  }
+
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+  }
+
+  .brand-button strong {
+    font-size: 15px;
+  }
+
   .site-nav {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
     overflow: visible;
+    width: 100%;
   }
 
   .site-nav button {
     justify-content: center;
-    padding: 8px 5px;
-    font-size: 12px;
+    min-height: 42px;
+    padding: 8px 4px;
+    font-size: 11px;
+    line-height: 1;
+  }
+
+  .site-nav button svg {
+    width: 14px;
+    height: 14px;
   }
 
   .hero-page h1,
   .page-heading h1,
   .certificate-paper h1 {
-    font-size: 42px;
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .hero-page p,
+  .page-heading p,
+  .empty-state p {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .hero-page,
+  .home-section,
+  .page-section,
+  .learn-layout,
+  .certificate-page {
+    width: 100%;
+  }
+
+  .hero-page {
+    gap: 28px;
+  }
+
+  .trust-row {
+    gap: 8px;
+  }
+
+  .trust-row span {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .home-section {
+    margin-top: 46px;
+  }
+
+  .home-section-heading h2,
+  .culture-note h2,
+  .quiz-teaser h2 {
+    font-size: 30px;
+    line-height: 1.08;
+  }
+
+  .scenario-rail {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+
+  .scenario-rail span {
+    text-align: center;
   }
 
   .hero-dashboard,
@@ -1328,25 +1419,141 @@ textarea {
     display: grid;
   }
 
+  .exam-shell {
+    min-height: 100dvh;
+  }
+
+  .exam-sidebar {
+    padding-top: 12px;
+  }
+
+  .exam-sidebar h2 {
+    margin: 10px 14px 6px;
+    font-size: 18px;
+    line-height: 1.35;
+  }
+
+  .exam-sidebar p {
+    margin: 0 14px 12px;
+  }
+
+  .back-button {
+    min-height: 42px;
+    margin-left: 8px;
+  }
+
   .question-panel,
   .result-panel {
-    width: calc(100% - 28px);
-    margin: 26px auto;
+    width: calc(100% - 20px);
+    margin: 22px auto;
   }
 
   .exam-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
     padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.96);
+  }
+
+  .exam-topbar time {
+    min-width: 98px;
+    padding: 8px 10px;
+    font-size: 14px;
   }
 
   .question-grid {
-    grid-template-columns: repeat(5, 40px);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+    padding: 12px 14px 14px;
+  }
+
+  .question-grid button {
+    width: 100%;
+    min-height: 42px;
+    height: 42px;
+    border-radius: 6px;
+  }
+
+  .question-text {
+    margin-bottom: 20px;
+    font-size: 17px;
   }
 
   .exam-options {
+    gap: 14px;
     margin-left: 0;
   }
 
   .exam-options button {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr);
+    align-items: start;
+    min-height: 44px;
     font-size: 16px;
+    line-height: 1.45;
+    text-align: left;
+  }
+
+  .fill-area input {
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .exam-footer {
+    gap: 10px;
+    margin-top: 26px;
+    padding-top: 22px;
+  }
+
+  .next-button {
+    min-height: 48px;
+  }
+
+  .result-panel h1 {
+    font-size: 38px;
+  }
+
+  .result-panel > strong {
+    font-size: 34px;
+  }
+
+  .recommendation-list {
+    display: grid;
+  }
+
+  .recommendation-list button {
+    justify-content: space-between;
+    min-height: 44px;
+  }
+
+  .review-list article {
+    padding: 12px;
+  }
+
+  .login-modal {
+    width: calc(100% - 24px);
+    padding: 24px;
+  }
+
+  .login-modal h2 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-nav button {
+    gap: 4px;
+    font-size: 10px;
+  }
+
+  .hero-page h1,
+  .page-heading h1,
+  .certificate-paper h1 {
+    font-size: 36px;
+  }
+
+  .question-grid {
+    gap: 6px;
   }
 }
