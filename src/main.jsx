@@ -20,6 +20,7 @@ import {
   LayoutDashboard,
   LogIn,
   LogOut,
+  Menu,
   Mic,
   PenLine,
   Plane,
@@ -452,38 +453,55 @@ function App() {
 }
 
 function Header({ page, user, onGo, onLogin, onLogout }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function navigate(nextPage) {
+    onGo(nextPage);
+    setMenuOpen(false);
+  }
+
   return (
     <header className="site-header">
-      <button className="brand-button" onClick={() => onGo("home")}>
+      <button className="brand-button" onClick={() => navigate("home")}>
         <span className="brand-mark">N</span>
         <span>
           <strong>Nusantara</strong>
           <small>Language Academy</small>
         </span>
       </button>
-      <nav className="site-nav" aria-label="Main navigation">
+      <nav className={menuOpen ? "site-nav open" : "site-nav"} aria-label="Main navigation">
         {navItems.map((item) => {
           const Icon = item.icon;
           return (
-            <button className={page === item.page ? "active" : ""} key={item.page} onClick={() => onGo(item.page)}>
+            <button className={page === item.page ? "active" : ""} key={item.page} onClick={() => navigate(item.page)}>
               <Icon size={16} />
               {item.label}
             </button>
           );
         })}
       </nav>
-      {user ? (
-        <button className="user-pill" onClick={onLogout}>
-          <UserRound size={16} />
-          {user.name}
-          <LogOut size={15} />
+      <div className="header-actions">
+        <button
+          className="mobile-menu-toggle"
+          aria-label={menuOpen ? "Tutup menu" : "Buka menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          {menuOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
-      ) : (
-        <button className="primary-button small" onClick={onLogin}>
-          <LogIn size={16} />
-          Login
-        </button>
-      )}
+        {user ? (
+          <button className="user-pill" onClick={onLogout}>
+            <UserRound size={16} />
+            {user.name}
+            <LogOut size={15} />
+          </button>
+        ) : (
+          <button className="primary-button small" onClick={onLogin}>
+            <LogIn size={16} />
+            Login
+          </button>
+        )}
+      </div>
     </header>
   );
 }

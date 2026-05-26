@@ -78,6 +78,7 @@ button {
 .brand-button,
 .user-pill,
 .site-nav button,
+.mobile-menu-toggle,
 .back-button {
   border: 0;
   background: transparent;
@@ -139,6 +140,17 @@ button {
 .site-nav button:hover {
   color: var(--ink);
   background: #fff;
+}
+
+.header-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.mobile-menu-toggle {
+  display: none;
 }
 
 .user-pill {
@@ -1297,13 +1309,13 @@ textarea {
 
   .site-header {
     top: 8px;
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 10px;
     margin-bottom: 30px;
     padding: 10px;
   }
 
   .brand-button,
-  .user-pill,
   .primary-button,
   .secondary-button {
     width: 100%;
@@ -1323,20 +1335,55 @@ textarea {
     font-size: 15px;
   }
 
-  .site-nav {
+  .header-actions {
+    justify-self: end;
+    gap: 6px;
+  }
+
+  .mobile-menu-toggle {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .site-header .primary-button.small,
+  .site-header .user-pill {
+    width: auto;
+    min-height: 42px;
+    padding: 9px 12px;
+    white-space: nowrap;
+  }
+
+  .site-header .user-pill {
+    max-width: 142px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .site-nav {
+    display: none;
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr;
     gap: 5px;
     overflow: visible;
     width: 100%;
+    margin-top: 2px;
+  }
+
+  .site-nav.open {
+    display: grid;
   }
 
   .site-nav button {
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 42px;
-    padding: 8px 4px;
-    font-size: 11px;
-    line-height: 1;
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.1;
   }
 
   .site-nav button svg {
@@ -1544,7 +1591,7 @@ textarea {
 @media (max-width: 380px) {
   .site-nav button {
     gap: 4px;
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .hero-page h1,
